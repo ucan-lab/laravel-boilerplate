@@ -13,7 +13,7 @@ final class Handler extends ExceptionHandler
      * @var array<class-string<Throwable>, \Psr\Log\LogLevel::*>
      */
     protected $levels = [
-        //
+
     ];
 
     /**
@@ -22,7 +22,7 @@ final class Handler extends ExceptionHandler
      * @var array<int, class-string<Throwable>>
      */
     protected $dontReport = [
-        //
+
     ];
 
     /**
@@ -43,8 +43,5 @@ final class Handler extends ExceptionHandler
      */
     public function register()
     {
-        $this->reportable(function (Throwable $e) {
-            //
-        });
     }
 }
