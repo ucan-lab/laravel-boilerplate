@@ -1,4 +1,4 @@
-name: laravel-create-project
+name: Laravel Testing
 
 on:
   pull_request:
@@ -19,9 +19,7 @@ jobs:
         run: docker compose build
 
       - name: Create & Start Docker Containers
-        run: |
-          mkdir src
-          docker compose up -d
+        run: docker compose up -d
 
       - name: OS Version
         run: |
@@ -34,11 +32,14 @@ jobs:
       - name: Composer Version
         run: docker compose exec -T app composer --version
 
-      - name: Create Laravel Project
-        run: docker compose exec -T app composer create-project --prefer-dist laravel/laravel .
+      - name: Composer Install
+        run: docker compose exec -T app composer install
 
       - name: Laravel Version
         run: docker compose exec -T app php artisan --version
+
+      - name: Laravel Settings
+        run: docker compose exec -T app cp .env.example .env
 
       - name: Laravel Migrate Testing
         run: docker compose exec -T app php artisan migrate
