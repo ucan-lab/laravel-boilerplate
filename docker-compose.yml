@@ -4,10 +4,7 @@ volumes:
   psysh-store:
 services:
   app:
-    build:
-      context: .
-      dockerfile: ./infra/docker/php/Dockerfile
-      target: ${APP_BUILD_TARGET:-development}
+    image: ucanlab/laravel-boilerplate-app:development
     volumes:
       - type: bind
         source: ./src
@@ -32,9 +29,7 @@ services:
       - DB_PASSWORD=${DB_PASSWORD:-secret}
 
   web:
-    build:
-      context: .
-      dockerfile: ./infra/docker/nginx/Dockerfile
+    image: ucanlab/laravel-boilerplate-web
     ports:
       - target: 80
         published: ${WEB_PUBLISHED_PORT:-80}
@@ -46,9 +41,7 @@ services:
         target: /data
 
   db:
-    build:
-      context: .
-      dockerfile: ./infra/docker/mysql/Dockerfile
+    image: ucanlab/laravel-boilerplate-db
     ports:
       - target: 3306
         published: ${DB_PUBLISHED_PORT:-3306}

@@ -1,7 +1,9 @@
 name: Docker Image Register
 
 on:
-  pull_request:
+  push:
+    branches:
+      - main
     paths:
       - 'infra/*'
 
