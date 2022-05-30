@@ -1,10 +1,10 @@
 name: Insights
 
 on:
-  - pull_request
+  pull_request:
 
 jobs:
-  phpinsights:
+  insights:
     runs-on: ubuntu-latest
 
     name: PHP Insights checks
@@ -18,7 +18,7 @@ jobs:
 
       - name: Install Dependencies
         working-directory: ./src
-        run: composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --prefer-dist
+        run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
 
       - name: Insights Analyse
         working-directory: ./src
