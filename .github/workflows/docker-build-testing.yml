@@ -1,0 +1,28 @@
+name: Docker Build Testing
+
+on:
+  pull_request:
+    paths:
+      - 'infra/*'
+
+jobs:
+  docker-build-testing:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Docker Version
+        run: docker version
+
+      - name: Build app container (development)
+        run: docker build --target development -f ./infra/docker/php/Dockerfile .
+
+      - name: Build app container (deploy)
+        run: docker build --target deploy -f ./infra/docker/php/Dockerfile .
+
+      - name: Build web container
+        run: docker build -f ./infra/docker/nginx/Dockerfile .
+
+      - name: Build db container
+        run: docker build -f ./infra/docker/mysql/Dockerfile .
